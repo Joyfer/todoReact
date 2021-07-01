@@ -1,5 +1,5 @@
 // Components import
-import Sidebar from "./components/bars/Sidebar";
+import Sidebar from "./components/bars/sidebar/Sidebar";
 import HeadInformation from "./components/header/HeadInformation";
 // MUI
 import { Container, Grid } from "@material-ui/core";
