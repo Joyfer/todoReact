@@ -1,7 +1,7 @@
 // Components import
 import Sidebar from "./components/bars/sidebar/Sidebar";
 import HeadInformation from "./components/header/HeadInformation";
-import Card from "./components/todoList/Card";
+import Card from "./components/todoList/card/Card";
 // MUI
 import { Container, Grid } from "@material-ui/core";
 

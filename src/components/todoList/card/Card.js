@@ -1,4 +1,6 @@
 import React from "react";
+import CardHeader from "./CardHeader";
+//MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: "33.33%",
     flexShrink: 0,
-    margin: "auto 0"
+    margin: "auto 0",
   },
   card: {
     backgroundColor: theme.palette.primary.main,
@@ -59,17 +61,14 @@ export default function ControlledAccordions() {
                 color="secondary"
                 value={100}
                 size={30}
-                style={{marginRight: 8}}
+                style={{ marginRight: 8 }}
               />
               <Typography className={classes.heading}>
                 General settings
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-                feugiat. Aliquam eget maximus est, id dignissim quam.
-              </Typography>
+              <CardHeader />
             </AccordionDetails>
           </Accordion>
         );
