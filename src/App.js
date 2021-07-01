@@ -6,7 +6,7 @@ import { Container, Grid } from "@material-ui/core";
 
 function App() {
   return (
-    <Container className="App">
+    <Container className="App" style={{marginTop: 20}}>
       <Grid container spacing={3} style={{ justifyContent: "center" }}>
         <Grid item xs={3}>
           <Sidebar />

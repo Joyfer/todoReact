@@ -12,13 +12,16 @@ const theme = createMuiTheme({
   palette: {
     primary: { main: brown[300] },
   },
+  typography: {
+    fontFamily: ["Rubik", "sansSerif"].join(","),
+  },
 });
 // Theme MUI end
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>,
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>,
   document.getElementById("root")
 );
 
