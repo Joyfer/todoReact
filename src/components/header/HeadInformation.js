@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 const useStyles = makeStyles((theme) => ({
   root: {
     color: "white",
+    padding: "0 0 20px 0"
   },
 }));
 
@@ -26,7 +27,7 @@ const HeadInformation = () => {
             variant="determinate"
             value={45}
             color="secondary"
-            size={80}
+            size={60}
           />
           <Box
             top={0}
