@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddForm = ({ addNewListTask }) => {
+const AddForm = ({ addNewMiniTask, idCallback }) => {
   const classes = useStyles();
   const [taskData, setTaskData] = useState("");
 
   const sendData = () => {
-    addNewListTask(taskData);
+    addNewMiniTask({name: taskData, idCallback: idCallback});
     setTaskData("")
   };
 
@@ -29,10 +29,10 @@ const AddForm = ({ addNewListTask }) => {
     <Grid container spacing={2}>
       <Grid item xs={10}>
         <FormControl fullWidth>
-          <InputLabel htmlFor="mi-campo">Add</InputLabel>
+          <InputLabel htmlFor={`${idCallback}`}>Add</InputLabel>
           <Input
             style={{ color: "white" }}
-            id="mi-campo"
+            id={`${idCallback}`}
             aria-describedby="mi-texto-de-ayuda"
             value={taskData}
             onChange={(e) => setTaskData(e.target.value)}

@@ -25,23 +25,17 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 15,
   },
 }));
-const CardBody = ({ addTask }) => {
+const CardBody = ({ addNewMiniTask, description, miniTasks, idCallback, deleteMiniTask }) => {
   const classes = useStyles();
-  const [listTask, setListTask] = React.useState(["1", "2"]);
-
-  const addNewListTask = (data) => {
-    setListTask([...listTask, data]);
-  };
 
   return (
     <Box>
       <Typography style={{ paddingBottom: 8 }}>
-        Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-        Aliquam eget maximus est, id dignissim quam.
+       {description}
       </Typography>
-      <AddForm addNewListTask={addNewListTask} />
+      <AddForm idCallback={idCallback} addNewMiniTask={addNewMiniTask} />
       <List>
-        {listTask.map((el) => {
+        {miniTasks.map((el, index) => {
           return (
             <ListItem key={el}>
               <ListItemText primary={el} />
@@ -56,6 +50,7 @@ const CardBody = ({ addTask }) => {
                 <IconButton
                   className={classes.deleteButton}
                   aria-label="delete"
+                  onClick={() => deleteMiniTask({index: index, idCallback: idCallback })}
                 >
                   <DeleteIcon />
                 </IconButton>

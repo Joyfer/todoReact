@@ -29,15 +29,35 @@ const useStyles = makeStyles((theme) => ({
       border: "none",
     },
   },
+  details: {
+    display: "block",
+  },
 }));
 
 export default function ControlledAccordions() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [tasks, setTasks] = React.useState(["1", "2"]);
+  const [tasks, setTasks] = React.useState([
+    {
+      id: "121",
+      name: "hola",
+      description: "asdasdasdada",
+      miniTasks: ["rodeo"],
+    },
+  ]);
 
-  const addNewTask = (data) => {
-    setTasks([...tasks, data]);
+  const addNewMiniTask = ({ name, idCallback }) => {
+    let element = tasks.findIndex((el) => el.id === idCallback);
+    let newArray = [...tasks];
+    newArray[element].miniTasks.push(name);
+    setTasks(newArray);
+  };
+
+  const deleteMiniTask = ({ index, idCallback }) => {
+    let element = tasks.findIndex((el) => el.id === idCallback);
+    let newArray = [...tasks];
+    newArray[element].miniTasks.splice(index, 1);
+    setTasks(newArray);
   };
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -46,12 +66,12 @@ export default function ControlledAccordions() {
 
   return (
     <div className={classes.root}>
-      {tasks.map((el) => {
+      {tasks.map(({ id, name, description, miniTasks }, index) => {
         return (
           <Accordion
-            key={el}
-            expanded={expanded === `panel${el}`}
-            onChange={handleChange(`panel${el}`)}
+            key={index}
+            expanded={expanded === `panel${index}`}
+            onChange={handleChange(`panel${index}`)}
             classes={{
               root: classes.card,
             }}
@@ -68,12 +88,20 @@ export default function ControlledAccordions() {
                 size={30}
                 style={{ marginRight: 8 }}
               />
-              <Typography className={classes.heading}>
-                General settings
-              </Typography>
+              <Typography className={classes.heading}>{name}</Typography>
             </AccordionSummary>
-            <AccordionDetails>
-              <CardBody addTask={addNewTask} />
+            <AccordionDetails
+              classes={{
+                root: classes.details,
+              }}
+            >
+              <CardBody
+                description={description}
+                miniTasks={miniTasks}
+                idCallback={id}
+                addNewMiniTask={addNewMiniTask}
+                deleteMiniTask={deleteMiniTask}
+              />
             </AccordionDetails>
           </Accordion>
         );
