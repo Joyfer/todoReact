@@ -1,5 +1,5 @@
 import React from "react";
-import CardHeader from "./CardHeader";
+import CardBody from "./CardBody";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto 0",
   },
   card: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.info.main,
     color: "white",
     marginBottom: 5,
     borderRadius: 3,
@@ -34,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
 export default function ControlledAccordions() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [tasks, setTasks] = React.useState(["1", "2"]);
+
+  const addNewTask = (data) => {
+    setTasks([...tasks, data]);
+  };
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -41,7 +46,7 @@ export default function ControlledAccordions() {
 
   return (
     <div className={classes.root}>
-      {["1", "2", "3", "4", "5"].map((el) => {
+      {tasks.map((el) => {
         return (
           <Accordion
             key={el}
@@ -68,7 +73,7 @@ export default function ControlledAccordions() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <CardHeader />
+              <CardBody addTask={addNewTask} />
             </AccordionDetails>
           </Accordion>
         );

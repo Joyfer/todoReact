@@ -9,13 +9,14 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import brown from "@material-ui/core/colors/brown";
 import green from "@material-ui/core/colors/green";
 import red from "@material-ui/core/colors/red";
-
+import pink from "@material-ui/core/colors/pink";
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: brown[300] },
+    primary: { main: pink[600] },
     success: {main: green[700]},
-    error: {main: red[800]}
+    error: {main: red[800]},
+    info: {main: brown[300]}
   },
   typography: {
     fontFamily: ["Rubik", "sansSerif"].join(","),

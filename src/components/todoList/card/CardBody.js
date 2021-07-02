@@ -1,4 +1,5 @@
 import React from "react";
+import AddForm from "../input/AddForm";
 // MUI
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -16,10 +17,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "50%",
   },
-  itemCompleted: {
-    color: "white",
-    backgroundColor: theme.palette.success.main,
-  },
   checkButton: {
     color: theme.palette.success.main,
   },
@@ -28,34 +25,47 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 15,
   },
 }));
-const CardHeader = () => {
+const CardBody = ({ addTask }) => {
   const classes = useStyles();
+  const [listTask, setListTask] = React.useState(["1", "2"]);
+
+  const addNewListTask = (data) => {
+    setListTask([...listTask, data]);
+  };
 
   return (
     <Box>
-      <Typography>
+      <Typography style={{ paddingBottom: 8 }}>
         Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
         Aliquam eget maximus est, id dignissim quam.
       </Typography>
+      <AddForm addNewListTask={addNewListTask} />
       <List>
-        <ListItem>
-          <ListItemText primary="Single-line item" />
-          <ListItemSecondaryAction>
-            <IconButton
-              className={classes.checkButton}
-              edge="end"
-              aria-label="delete"
-            >
-              <CheckIcon />
-            </IconButton>
-            <IconButton className={classes.deleteButton} aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
-        <ListItem disabled className={classes.itemCompleted}>
+        {listTask.map((el) => {
+          return (
+            <ListItem key={el}>
+              <ListItemText primary={el} />
+              <ListItemSecondaryAction>
+                <IconButton
+                  className={classes.checkButton}
+                  edge="end"
+                  aria-label="delete"
+                >
+                  <CheckIcon />
+                </IconButton>
+                <IconButton
+                  className={classes.deleteButton}
+                  aria-label="delete"
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          );
+        })}
+        {/* <ListItem disabled>
           <ListItemIcon>
-            <CheckIcon className={classes.itemCompleted} />
+            <CheckIcon />
           </ListItemIcon>
           <ListItemText primary="Single-line item" />
           <ListItemSecondaryAction>
@@ -66,10 +76,10 @@ const CardHeader = () => {
               <DeleteIcon />
             </IconButton>
           </ListItemSecondaryAction>
-        </ListItem>
+        </ListItem> */}
       </List>
     </Box>
   );
 };
 
-export default CardHeader;
+export default CardBody;
