@@ -16,21 +16,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuSubItem = ({ onOpen }) => {
+const MenuSubItem = ({ onOpen, list }) => {
   const classes = useStyles();
 
   return (
     <Collapse in={onOpen} timeout={300} unmountOnExit>
       <List component="div" disablePadding>
-        <ListItem button className={classes.nested}>
-          <ListItemIcon>
-            <FiberManualRecordIcon
-              fontSize="small"
-              style={{ color: "white" }}
-            />
-          </ListItemIcon>
-          <ListItemText primary="Starred" />
-        </ListItem>
+        {list.map(({name}) => {
+          return (
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <FiberManualRecordIcon
+                  fontSize="small"
+                  style={{ color: "white" }}
+                />
+              </ListItemIcon>
+              <ListItemText primary={name} />
+            </ListItem>
+          );
+        })}
       </List>
     </Collapse>
   );

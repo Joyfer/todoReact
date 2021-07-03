@@ -17,12 +17,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddForm = ({ idCallback }) => {
+const AddForm = ({ idCallback, myFunction }) => {
   const classes = useStyles();
   const [taskData, setTaskData] = useState("");
-  const {addNewMiniTask} = useContext(TasksContext)
-  const sendData = () => {
-    addNewMiniTask({name: taskData, idCallback: idCallback});
+
+  const runMyFunction = () => {
+    myFunction({data: taskData})
     setTaskData("")
   };
 
@@ -41,7 +41,7 @@ const AddForm = ({ idCallback }) => {
         </FormControl>
       </Grid>
       <Grid item xs={2} className={classes.gridFlex}>
-        <Button fullWidth color="primary" variant="text" onClick={sendData}>
+        <Button fullWidth color="primary" variant="text" onClick={runMyFunction}>
           ADD
         </Button>
       </Grid>

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import AddForm from "../input/AddForm";
 import TasksContext from "../../../context/TasksContext";
 // MUI
@@ -26,15 +26,18 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 15,
   },
 }));
-const CardBody = ({ addNewMiniTask, description, miniTasks, idCallback }) => {
+const CardBody = ({  description, miniTasks, idCallback }) => {
   const classes = useStyles();
-  const {deleteMiniTask} = useContext(TasksContext)
+  const { deleteMiniTask, addNewMiniTask } = useContext(TasksContext);
+
+  const sendData = ({ data }) => {
+    addNewMiniTask({name: data, idCallback: idCallback});
+  };
+
   return (
     <Box>
-      <Typography style={{ paddingBottom: 8 }}>
-       {description}
-      </Typography>
-      <AddForm idCallback={idCallback} addNewMiniTask={addNewMiniTask} />
+      <Typography style={{ paddingBottom: 8 }}>{description}</Typography>
+      <AddForm idCallback={idCallback} myFunction={sendData} />
       <List>
         {miniTasks.map((el, index) => {
           return (
@@ -51,7 +54,9 @@ const CardBody = ({ addNewMiniTask, description, miniTasks, idCallback }) => {
                 <IconButton
                   className={classes.deleteButton}
                   aria-label="delete"
-                  onClick={() => deleteMiniTask({index: index, idCallback: idCallback })}
+                  onClick={() =>
+                    deleteMiniTask({ index: index, idCallback: idCallback })
+                  }
                 >
                   <DeleteIcon />
                 </IconButton>

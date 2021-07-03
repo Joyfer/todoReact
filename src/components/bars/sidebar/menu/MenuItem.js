@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuItem = () => {
+const MenuItem = ({data}) => {
   const classes = useStyles();
   const [open, setOpen] = useState(true);
 
@@ -27,13 +27,13 @@ const MenuItem = () => {
   };
 
   return (
-    <List component="nav" className={classes.root}>
+    <>
       <ListItem button onClick={handleClick}>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary={data.category} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <MenuSubItem onOpen={open} />
-    </List>
+      <MenuSubItem onOpen={open} list={data.list} />
+    </>
   );
 };
 

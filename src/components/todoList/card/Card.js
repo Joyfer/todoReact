@@ -46,7 +46,7 @@ export default function ControlledAccordions() {
 
   return (
     <div className={classes.root}>
-      {tasks.map(({ id, name, description, miniTasks }, index) => {
+      {tasks[0].list.map(({ id, name, description, miniTasks }, index) => {
         return (
           <Accordion
             key={index}
