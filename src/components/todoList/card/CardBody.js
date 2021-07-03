@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useContext} from "react";
 import AddForm from "../input/AddForm";
+import TasksContext from "../../../context/TasksContext";
 // MUI
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -25,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 15,
   },
 }));
-const CardBody = ({ addNewMiniTask, description, miniTasks, idCallback, deleteMiniTask }) => {
+const CardBody = ({ addNewMiniTask, description, miniTasks, idCallback }) => {
   const classes = useStyles();
-
+  const {deleteMiniTask} = useContext(TasksContext)
   return (
     <Box>
       <Typography style={{ paddingBottom: 8 }}>

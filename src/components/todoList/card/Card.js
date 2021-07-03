@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import CardBody from "./CardBody";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,6 +8,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import TasksContext from "../../../context/TasksContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,29 +37,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ControlledAccordions() {
   const classes = useStyles();
+  const { tasks } = useContext(TasksContext);
   const [expanded, setExpanded] = React.useState(false);
-  const [tasks, setTasks] = React.useState([
-    {
-      id: "121",
-      name: "hola",
-      description: "asdasdasdada",
-      miniTasks: ["rodeo"],
-    },
-  ]);
-
-  const addNewMiniTask = ({ name, idCallback }) => {
-    let element = tasks.findIndex((el) => el.id === idCallback);
-    let newArray = [...tasks];
-    newArray[element].miniTasks.push(name);
-    setTasks(newArray);
-  };
-
-  const deleteMiniTask = ({ index, idCallback }) => {
-    let element = tasks.findIndex((el) => el.id === idCallback);
-    let newArray = [...tasks];
-    newArray[element].miniTasks.splice(index, 1);
-    setTasks(newArray);
-  };
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -99,9 +79,7 @@ export default function ControlledAccordions() {
                 description={description}
                 miniTasks={miniTasks}
                 idCallback={id}
-                addNewMiniTask={addNewMiniTask}
-                deleteMiniTask={deleteMiniTask}
-              />
+              ></CardBody>
             </AccordionDetails>
           </Accordion>
         );

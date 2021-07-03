@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import TasksContext from "../../../context/TasksContext";
 // MUI
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -16,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddForm = ({ addNewMiniTask, idCallback }) => {
+const AddForm = ({ idCallback }) => {
   const classes = useStyles();
   const [taskData, setTaskData] = useState("");
-
+  const {addNewMiniTask} = useContext(TasksContext)
   const sendData = () => {
     addNewMiniTask({name: taskData, idCallback: idCallback});
     setTaskData("")
