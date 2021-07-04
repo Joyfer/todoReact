@@ -1,16 +1,23 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const TasksContext = createContext();
 
 const TaskProvider = ({ children }) => {
+  useEffect(() => {
+    let data = localStorage.getItem("myData");
+    if (data === null) {
+      return;
+    } else {
+      setTasks(JSON.parse(data));
+    }
+  }, []);
   const [tasks, setTasks] = useState([
     {
       category: "Programacion",
       list: [
         {
           id: "121",
-          name: "hola",
-          description: "asdasdasdada",
+          name: "Hi!",
           miniTasks: [{ name: "rodeo", completed: false }],
         },
       ],
@@ -27,6 +34,7 @@ const TaskProvider = ({ children }) => {
       newArray = [...tasks];
     newArray[category].list.push(newElement);
     setTasks(newArray);
+    localStorage.setItem("myData", JSON.stringify(newArray));
   };
 
   const deleteTask = ({ idCallback }) => {
@@ -34,6 +42,7 @@ const TaskProvider = ({ children }) => {
       newArray = [...tasks];
     newArray[category].list.splice(element, 1);
     setTasks(newArray);
+    localStorage.setItem("myData", JSON.stringify(newArray));
   };
 
   const addNewMiniTask = ({ name, idCallback }) => {
@@ -44,6 +53,7 @@ const TaskProvider = ({ children }) => {
       completed: false,
     });
     setTasks(newArray);
+    localStorage.setItem("myData", JSON.stringify(newArray));
   };
 
   const deleteMiniTask = ({ index, idCallback }) => {
@@ -51,6 +61,7 @@ const TaskProvider = ({ children }) => {
       newArray = [...tasks];
     newArray[category].list[element].miniTasks.splice(index, 1);
     setTasks(newArray);
+    localStorage.setItem("myData", JSON.stringify(newArray));
   };
 
   const completedMiniTask = ({ index, idCallback }) => {
@@ -63,6 +74,7 @@ const TaskProvider = ({ children }) => {
       completed: true,
     });
     setTasks(newArray);
+    localStorage.setItem("myData", JSON.stringify(newArray));
   };
 
   const [category, setCategory] = useState(0);

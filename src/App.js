@@ -11,10 +11,10 @@ function App() {
     <Container className="App" style={{ marginTop: 20 }}>
       <TaskProvider>
         <Grid container spacing={3} style={{ justifyContent: "center" }}>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <Sidebar />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={6}>
             <HeadInformation />
             <Card />
           </Grid>

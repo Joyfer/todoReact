@@ -53,7 +53,7 @@ export default function ControlledAccordions() {
       <div className={classes.addForm}>
         <AddForm myFunction={addNewTask} />
       </div>
-      {tasks[0].list.map(({ id, name, description, miniTasks }, index) => {
+      {tasks[0].list.map(({ id, name, miniTasks }, index) => {
         return (
           <Accordion
             key={index}
@@ -83,7 +83,6 @@ export default function ControlledAccordions() {
               }}
             >
               <CardBody
-                description={description}
                 miniTasks={miniTasks}
                 idCallback={id}
               ></CardBody>

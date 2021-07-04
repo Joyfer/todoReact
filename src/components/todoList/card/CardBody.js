@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import AddForm from "../input/AddForm";
 import TasksContext from "../../../context/TasksContext";
 // MUI
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -27,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CardBody = ({ description, miniTasks, idCallback }) => {
+const CardBody = ({  miniTasks, idCallback }) => {
   const classes = useStyles();
   const { deleteMiniTask, addNewMiniTask, completedMiniTask, deleteTask } = useContext(
     TasksContext
@@ -39,7 +38,6 @@ const CardBody = ({ description, miniTasks, idCallback }) => {
 
   return (
     <Box>
-      <Typography style={{ paddingBottom: 8 }}>{description}</Typography>
       <IconButton
         className={classes.deleteButton}
         aria-label="delete"
