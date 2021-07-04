@@ -79,20 +79,6 @@ const CardBody = ({ description, miniTasks, idCallback }) => {
             </ListItem>
           );
         })}
-        {/* <ListItem disabled>
-          <ListItemIcon>
-            <CheckIcon />
-          </ListItemIcon>
-          <ListItemText primary="Single-line item" />
-          <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-            <IconButton aria-label="delete" style={{ marginLeft: 15 }}>
-              <DeleteIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem> */}
       </List>
     </Box>
   );

@@ -22,9 +22,9 @@ const MenuSubItem = ({ onOpen, list }) => {
   return (
     <Collapse in={onOpen} timeout={300} unmountOnExit>
       <List component="div" disablePadding>
-        {list.map(({name}) => {
+        {list.map(({name}, index) => {
           return (
-            <ListItem button className={classes.nested}>
+            <ListItem key={index} button className={classes.nested}>
               <ListItemIcon>
                 <FiberManualRecordIcon
                   fontSize="small"

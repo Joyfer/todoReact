@@ -22,7 +22,7 @@ const AddForm = ({ idCallback, myFunction }) => {
   const [taskData, setTaskData] = useState("");
 
   const runMyFunction = () => {
-    if (taskData != "") {
+    if (taskData !== "") {
       myFunction({ data: taskData });
       setTaskData("");
     }

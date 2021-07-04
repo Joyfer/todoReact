@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import CardBody from "./CardBody";
+import AddForm from "../input/AddForm";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
@@ -33,19 +34,30 @@ const useStyles = makeStyles((theme) => ({
   details: {
     display: "block",
   },
+  addForm: {
+    marginBottom: 10,
+  },
 }));
 
 export default function ControlledAccordions() {
   const classes = useStyles();
-  const { tasks } = useContext(TasksContext);
+  const { tasks, addNewTask } = useContext(TasksContext);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const completedPercentages = (miniTasks) => {
+    let completed = miniTasks.filter((el) => el.completed === true);
+    return (100 * completed.length) / miniTasks.length;
+  };
+
   return (
     <div className={classes.root}>
+      <div className={classes.addForm}>
+        <AddForm myFunction={addNewTask} />
+      </div>
       {tasks[0].list.map(({ id, name, description, miniTasks }, index) => {
         return (
           <Accordion
@@ -64,7 +76,7 @@ export default function ControlledAccordions() {
               <CircularProgress
                 variant="determinate"
                 color="secondary"
-                value={100}
+                value={completedPercentages(miniTasks)}
                 size={30}
                 style={{ marginRight: 8 }}
               />

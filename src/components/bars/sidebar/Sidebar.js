@@ -23,7 +23,11 @@ const SideBar = () => {
   return (
     <List component="nav" className={classes.root}>
       {tasks.map((el) => {
-        return <MenuItem data={el} />;
+        return (
+          <div key={el}>
+            <MenuItem data={el} />
+          </div>
+        );
       })}
     </List>
   );
