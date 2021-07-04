@@ -29,12 +29,12 @@ const TaskProvider = ({ children }) => {
     setTasks(newArray);
   };
 
-  const deleteTask = ({idCallback}) => {
+  const deleteTask = ({ idCallback }) => {
     let element = tasks[category].list.findIndex((el) => el.id === idCallback),
       newArray = [...tasks];
     newArray[category].list.splice(element, 1);
     setTasks(newArray);
-  }
+  };
 
   const addNewMiniTask = ({ name, idCallback }) => {
     let element = tasks[category].list.findIndex((el) => el.id === idCallback),
@@ -72,6 +72,16 @@ const TaskProvider = ({ children }) => {
     setCategory(myIndexCategory);
   };
 
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel, isAcorddion) => (event, isExpanded) => {
+    if (isAcorddion) {
+      setExpanded(isExpanded ? panel : false);
+    } else {
+      setExpanded(panel);
+    }
+  };
+
   const data = {
     tasks,
     addNewMiniTask,
@@ -80,7 +90,10 @@ const TaskProvider = ({ children }) => {
     changeCategory,
     completedMiniTask,
     addNewTask,
-    deleteTask
+    deleteTask,
+    expanded,
+    handleChange,
+    setExpanded,
   };
 
   return <TasksContext.Provider value={data}>{children}</TasksContext.Provider>;

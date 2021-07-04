@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import TasksContext from "../../../context/TasksContext";
+import React, { useState } from "react";
 // MUI
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";

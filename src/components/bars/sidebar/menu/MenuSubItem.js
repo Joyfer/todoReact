@@ -1,14 +1,13 @@
 // Components
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+import TasksContext from "../../../../context/TasksContext";
 //MUI
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
-import { ListItemIcon } from "@material-ui/core";
 import Collapse from "@material-ui/core/Collapse";
 import { makeStyles } from "@material-ui/core";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -18,19 +17,18 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuSubItem = ({ onOpen, list }) => {
   const classes = useStyles();
-
+  const { handleChange } = useContext(TasksContext);
   return (
     <Collapse in={onOpen} timeout={300} unmountOnExit>
       <List component="div" disablePadding>
-        {list.map(({name}, index) => {
+        {list.map(({ name }, index) => {
           return (
-            <ListItem key={index} button className={classes.nested}>
-              <ListItemIcon>
-                <FiberManualRecordIcon
-                  fontSize="small"
-                  style={{ color: "white" }}
-                />
-              </ListItemIcon>
+            <ListItem
+              key={index}
+              button
+              className={classes.nested}
+              onClick={handleChange(`panel${index}`, false)}
+            >
               <ListItemText primary={name} />
             </ListItem>
           );

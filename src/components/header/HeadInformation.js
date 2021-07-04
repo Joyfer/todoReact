@@ -1,5 +1,6 @@
 // Componets
-import React from "react";
+import React, { useContext } from "react";
+import TasksContext from "../../context/TasksContext";
 // MUI
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/styles/makeStyles";
@@ -9,23 +10,33 @@ import Box from "@material-ui/core/Box";
 const useStyles = makeStyles((theme) => ({
   root: {
     color: "white",
-    padding: "0 0 20px 0"
+    padding: "0 0 20px 0",
   },
 }));
 
 const HeadInformation = () => {
   const classes = useStyles();
+  const { tasks } = useContext(TasksContext);
+
+  const completedTasks = () => {
+    let totalTasks = [], completedTasks = []
+    for (let el of tasks[0].list) {
+      totalTasks.push(...el.miniTasks)
+      completedTasks.push(...el.miniTasks.filter((el) => el.completed === true))
+    }
+    return Math.round((100 * completedTasks.length) / totalTasks.length);
+  };
 
   return (
     <div className={classes.root}>
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <Typography variant="h3" color="inherit">
-          Programación
+          TODO
         </Typography>
         <Box position="relative" display="inline-flex">
           <CircularProgress
             variant="determinate"
-            value={45}
+            value={completedTasks()}
             color="secondary"
             size={60}
           />
@@ -40,17 +51,14 @@ const HeadInformation = () => {
             justifyContent="center"
           >
             <Typography variant="caption" component="div" color="inherit">
-              30%
+             {completedTasks()}%
             </Typography>
           </Box>
         </Box>
       </Box>
       <Box marginTop={3}>
         <Typography variant="body2" align="justify">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam sequi
-          natus dolore! Corporis similique dolore iste qui porro perspiciatis
-          nam repellendus placeat! Magni illum velit animi sit optio
-          consequuntur dolor!
+          Simple TODO with React, Context API and Local Storage!
         </Typography>
       </Box>
     </div>

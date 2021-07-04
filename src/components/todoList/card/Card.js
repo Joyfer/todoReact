@@ -41,12 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ControlledAccordions() {
   const classes = useStyles();
-  const { tasks, addNewTask } = useContext(TasksContext);
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+  const { tasks, addNewTask, expanded, handleChange } = useContext(TasksContext);
 
   const completedPercentages = (miniTasks) => {
     let completed = miniTasks.filter((el) => el.completed === true);
@@ -63,7 +58,7 @@ export default function ControlledAccordions() {
           <Accordion
             key={index}
             expanded={expanded === `panel${index}`}
-            onChange={handleChange(`panel${index}`)}
+            onChange={handleChange(`panel${index}`, true)}
             classes={{
               root: classes.card,
             }}
