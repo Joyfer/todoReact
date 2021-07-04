@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CardBody = ({ description, miniTasks, idCallback }) => {
   const classes = useStyles();
-  const { deleteMiniTask, addNewMiniTask, completedMiniTask } = useContext(
+  const { deleteMiniTask, addNewMiniTask, completedMiniTask, deleteTask } = useContext(
     TasksContext
   );
 
@@ -40,6 +40,13 @@ const CardBody = ({ description, miniTasks, idCallback }) => {
   return (
     <Box>
       <Typography style={{ paddingBottom: 8 }}>{description}</Typography>
+      <IconButton
+        className={classes.deleteButton}
+        aria-label="delete"
+        onClick={() => deleteTask({idCallback})}
+      >
+        <DeleteIcon />
+      </IconButton>
       <AddForm idCallback={idCallback} myFunction={sendData} />
       <List>
         {miniTasks.map(({ name, completed }, index) => {

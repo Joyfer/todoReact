@@ -29,6 +29,13 @@ const TaskProvider = ({ children }) => {
     setTasks(newArray);
   };
 
+  const deleteTask = ({idCallback}) => {
+    let element = tasks[category].list.findIndex((el) => el.id === idCallback),
+      newArray = [...tasks];
+    newArray[category].list.splice(element, 1);
+    setTasks(newArray);
+  }
+
   const addNewMiniTask = ({ name, idCallback }) => {
     let element = tasks[category].list.findIndex((el) => el.id === idCallback),
       newArray = [...tasks];
@@ -72,7 +79,8 @@ const TaskProvider = ({ children }) => {
     category,
     changeCategory,
     completedMiniTask,
-    addNewTask
+    addNewTask,
+    deleteTask
   };
 
   return <TasksContext.Provider value={data}>{children}</TasksContext.Provider>;
