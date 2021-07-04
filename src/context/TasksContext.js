@@ -11,7 +11,7 @@ const TaskProvider = ({ children }) => {
           id: "121",
           name: "hola",
           description: "asdasdasdada",
-          miniTasks: ["rodeo"],
+          miniTasks: [{name: "rodeo", completed: false}],
         },
       ],
     },
@@ -20,7 +20,7 @@ const TaskProvider = ({ children }) => {
   const addNewMiniTask = ({ name, idCallback }) => {
     let element = tasks[category].list.findIndex((el) => el.id === idCallback),
       newArray = [...tasks];
-    newArray[category].list[element].miniTasks.push(name);
+    newArray[category].list[element].miniTasks.unshift({name: name, completed: false});
     setTasks(newArray);
   };
 
@@ -28,6 +28,14 @@ const TaskProvider = ({ children }) => {
     let element = tasks[category].list.findIndex((el) => el.id === idCallback),
       newArray = [...tasks];
     newArray[category].list[element].miniTasks.splice(index, 1);
+    setTasks(newArray);
+  };
+
+  const completedMiniTask = ({ index, idCallback }) => {
+    let element = tasks[category].list.findIndex((el) => el.id === idCallback),
+      newArray = [...tasks], completed = newArray[category].list[element].miniTasks[index];
+      newArray[category].list[element].miniTasks.splice(index, 1)
+      newArray[category].list[element].miniTasks.push({...completed, completed: true})
     setTasks(newArray);
   };
 
@@ -44,6 +52,7 @@ const TaskProvider = ({ children }) => {
     deleteMiniTask,
     category,
     changeCategory,
+    completedMiniTask
   };
 
   return <TasksContext.Provider value={data}>{children}</TasksContext.Provider>;

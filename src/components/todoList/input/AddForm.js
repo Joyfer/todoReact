@@ -22,8 +22,11 @@ const AddForm = ({ idCallback, myFunction }) => {
   const [taskData, setTaskData] = useState("");
 
   const runMyFunction = () => {
-    myFunction({data: taskData})
-    setTaskData("")
+    if (taskData != "") {
+      myFunction({ data: taskData });
+      setTaskData("");
+    }
+    return;
   };
 
   return (
@@ -37,11 +40,21 @@ const AddForm = ({ idCallback, myFunction }) => {
             aria-describedby="mi-texto-de-ayuda"
             value={taskData}
             onChange={(e) => setTaskData(e.target.value)}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                runMyFunction();
+              }
+            }}
           />
         </FormControl>
       </Grid>
       <Grid item xs={2} className={classes.gridFlex}>
-        <Button fullWidth color="primary" variant="text" onClick={runMyFunction}>
+        <Button
+          fullWidth
+          color="primary"
+          variant="text"
+          onClick={runMyFunction}
+        >
           ADD
         </Button>
       </Grid>

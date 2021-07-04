@@ -26,12 +26,15 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 15,
   },
 }));
-const CardBody = ({  description, miniTasks, idCallback }) => {
+
+const CardBody = ({ description, miniTasks, idCallback }) => {
   const classes = useStyles();
-  const { deleteMiniTask, addNewMiniTask } = useContext(TasksContext);
+  const { deleteMiniTask, addNewMiniTask, completedMiniTask } = useContext(
+    TasksContext
+  );
 
   const sendData = ({ data }) => {
-    addNewMiniTask({name: data, idCallback: idCallback});
+    addNewMiniTask({ name: data, idCallback: idCallback });
   };
 
   return (
@@ -39,18 +42,30 @@ const CardBody = ({  description, miniTasks, idCallback }) => {
       <Typography style={{ paddingBottom: 8 }}>{description}</Typography>
       <AddForm idCallback={idCallback} myFunction={sendData} />
       <List>
-        {miniTasks.map((el, index) => {
+        {miniTasks.map(({ name, completed }, index) => {
           return (
-            <ListItem key={el}>
-              <ListItemText primary={el} />
-              <ListItemSecondaryAction>
-                <IconButton
-                  className={classes.checkButton}
-                  edge="end"
-                  aria-label="delete"
-                >
+            <ListItem key={index + name} disabled={completed}>
+              {completed ? (
+                <ListItemIcon>
                   <CheckIcon />
-                </IconButton>
+                </ListItemIcon>
+              ) : (
+                ""
+              )}
+              <ListItemText primary={name} />
+              <ListItemSecondaryAction>
+                {!completed ? (
+                  <IconButton
+                    className={classes.checkButton}
+                    edge="end"
+                    aria-label="completed"
+                    onClick={() => completedMiniTask({ index, idCallback })}
+                  >
+                    <CheckIcon />
+                  </IconButton>
+                ) : (
+                  ""
+                )}
                 <IconButton
                   className={classes.deleteButton}
                   aria-label="delete"
