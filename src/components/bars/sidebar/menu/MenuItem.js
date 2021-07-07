@@ -16,7 +16,7 @@ const MenuItem = ({data}) => {
   return (
     <>
       <ListItem button onClick={handleClick}>
-        <ListItemText primary={data.category} />
+        <ListItemText primary="TODO" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <MenuSubItem onOpen={open} list={data.list} />

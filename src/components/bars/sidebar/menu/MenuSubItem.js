@@ -29,7 +29,7 @@ const MenuSubItem = ({ onOpen, list }) => {
               className={classes.nested}
               onClick={handleChange(`panel${index}`, false)}
             >
-              <ListItemText primary={name} />
+              <ListItemText primary={name} style={{wordBreak: "break-all"}} />
             </ListItem>
           );
         })}
