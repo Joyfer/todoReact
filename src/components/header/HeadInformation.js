@@ -19,12 +19,19 @@ const HeadInformation = () => {
   const { tasks } = useContext(TasksContext);
 
   const completedTasks = () => {
-    let totalTasks = [], completedTasks = []
+    let totalTasks = [],
+      completedTasks = [];
     for (let el of tasks[0].list) {
-      totalTasks.push(...el.miniTasks)
-      completedTasks.push(...el.miniTasks.filter((el) => el.completed === true))
+      totalTasks.push(...el.miniTasks);
+      completedTasks.push(
+        ...el.miniTasks.filter((el) => el.completed === true)
+      );
     }
-    return Math.round((100 * completedTasks.length) / totalTasks.length);
+    if (totalTasks.length === 0) {
+      return 0;
+    } else {
+      return Math.round((100 * completedTasks.length) / totalTasks.length);
+    }
   };
 
   return (
@@ -51,7 +58,7 @@ const HeadInformation = () => {
             justifyContent="center"
           >
             <Typography variant="caption" component="div" color="inherit">
-             {completedTasks()}%
+              {completedTasks()}%
             </Typography>
           </Box>
         </Box>

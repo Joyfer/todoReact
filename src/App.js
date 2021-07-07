@@ -1,5 +1,4 @@
 // Components import
-import Sidebar from "./components/bars/sidebar/Sidebar";
 import HeadInformation from "./components/header/HeadInformation";
 import Card from "./components/todoList/card/Card";
 import { TaskProvider } from "./context/TasksContext";
@@ -11,9 +10,6 @@ function App() {
     <Container className="App" style={{ marginTop: 20 }}>
       <TaskProvider>
         <Grid container spacing={3} style={{ justifyContent: "center" }}>
-          <Grid item xs={12} md={5}>
-            <Sidebar />
-          </Grid>
           <Grid item xs={12} md={6}>
             <HeadInformation />
             <Card />

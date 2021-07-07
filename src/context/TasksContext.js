@@ -29,7 +29,7 @@ const TaskProvider = ({ children }) => {
         id: `${data + 121}`,
         name: data,
         description: "My custom description",
-        miniTasks: [{ name: "Change task description", completed: false }],
+        miniTasks: [{ name: "My task description", completed: false }],
       },
       newArray = [...tasks];
     newArray[category].list.push(newElement);

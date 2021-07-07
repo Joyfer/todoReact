@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    flexBasis: "33.33%",
     flexShrink: 0,
     margin: "auto 0",
+    width: "100%",
   },
   card: {
     backgroundColor: theme.palette.info.main,
@@ -41,7 +41,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ControlledAccordions() {
   const classes = useStyles();
-  const { tasks, addNewTask, expanded, handleChange } = useContext(TasksContext);
+  const { tasks, addNewTask, expanded, handleChange } = useContext(
+    TasksContext
+  );
 
   const completedPercentages = (miniTasks) => {
     let completed = miniTasks.filter((el) => el.completed === true);
@@ -75,17 +77,19 @@ export default function ControlledAccordions() {
                 size={30}
                 style={{ marginRight: 8 }}
               />
-              <Typography className={classes.heading}>{name}</Typography>
+              <Typography
+                className={classes.heading}
+                style={{ wordBreak: "break-word" }}
+              >
+                {name}
+              </Typography>
             </AccordionSummary>
             <AccordionDetails
               classes={{
                 root: classes.details,
               }}
             >
-              <CardBody
-                miniTasks={miniTasks}
-                idCallback={id}
-              ></CardBody>
+              <CardBody miniTasks={miniTasks} idCallback={id}></CardBody>
             </AccordionDetails>
           </Accordion>
         );
